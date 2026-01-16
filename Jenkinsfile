@@ -1,6 +1,8 @@
 pipeline {
   agent any
-
+tools {
+        terraform 'terraform'
+    }
   environment {
     ARM_CLIENT_ID       = credentials('AZURE_CLIENT_ID')
     ARM_CLIENT_SECRET   = credentials('AZURE_CLIENT_SECRET')
@@ -60,5 +62,6 @@ pipeline {
     }
   }
 }
+
 
 
