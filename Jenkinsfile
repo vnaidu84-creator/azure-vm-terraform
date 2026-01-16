@@ -11,11 +11,17 @@ pipeline {
   stages {
 
     stage('Checkout') {
-      steps {
-        git branch: 'main',
-            url: 'https://github.com/your-org/azure-vm-terraform.git'
-      }
+    steps {
+        checkout([
+            $class: 'GitSCM',
+            branches: [[name: '*/main']],
+            userRemoteConfigs: [[
+                url: 'git@github.com:vnaidu84-creator/azure-vm-terraform.git',
+                credentialsId: 'github-ssh'
+            ]]
+        ])
     }
+}
 
     stage('Terraform Init') {
       steps {
@@ -54,4 +60,5 @@ pipeline {
     }
   }
 }
+
 
